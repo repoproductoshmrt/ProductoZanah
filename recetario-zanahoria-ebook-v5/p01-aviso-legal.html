@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aviso legal — Zanahoria El Recetario de Autor</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --choco:#1C0F08; --dark:#2D1710; --rust:#8B3A0F; --orange:#C95B0C;
+  --amber:#E8882A; --gold:#F4B44A; --cream:#FDF6EC; --ivory:#FAF0DC;
+  --warm-white:#FFFBF4; --text-dark:#1C0F08; --text-mid:#4A2C1A; --text-soft:#7A5A40;
+  --font-display:'Playfair Display',Georgia,serif; --font-body:'DM Sans',system-ui,sans-serif;
+  --pad-page:60px; --pad-section:40px; --radius-card:12px; --radius-sm:6px;
+}
+@page { size:A4; margin:0; }
+body { font-family:var(--font-body); background:#e8ddd0; color:var(--text-dark); padding:24px 0; }
+
+.page-break {
+  width:794px; max-width:100%; margin:0 auto; height:2px;
+  background:repeating-linear-gradient(to right,rgba(201,91,12,0.25) 0px,rgba(201,91,12,0.25) 12px,transparent 12px,transparent 20px);
+}
+.page {
+  width:100%; max-width:794px; min-height:1123px; margin:0 auto;
+  background:var(--cream); position:relative; overflow:hidden;
+  display:flex; flex-direction:column; page-break-after:always;
+}
+.page:last-of-type { page-break-after:auto; }
+
+.band { background:var(--orange); padding:11px var(--pad-page); display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+.band p { font-family:var(--font-display); font-style:italic; font-size:14px; color:#fff; }
+.band.dark { background:var(--choco); }
+.band-dot { width:4px; height:4px; border-radius:50%; background:rgba(255,255,255,0.5); flex-shrink:0; }
+
+.page-footer { background:var(--choco); padding:16px var(--pad-page); margin-top:auto; display:flex; justify-content:space-between; align-items:center; }
+.page-footer .brand { font-family:var(--font-display); font-style:italic; font-size:15px; color:var(--gold); }
+.page-footer .pnum  { font-size:11px; color:rgba(255,255,255,0.3); letter-spacing:2px; }
+.page-footer .ptag  { font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.2); }
+
+.body-wrap { padding:var(--pad-section) var(--pad-page); background:var(--warm-white); flex:1; }
+
+p.lead { font-family:var(--font-display); font-style:italic; font-size:17px; color:var(--text-mid); line-height:1.65; margin-bottom:22px; }
+p.body-text { font-size:14px; color:var(--text-mid); line-height:1.75; margin-bottom:14px; }
+p.body-text:last-child { margin-bottom:0; }
+p.body-text strong { color:var(--text-dark); font-weight:600; }
+
+.divider { height:1px; margin:20px 0; background:linear-gradient(to right,rgba(201,91,12,0.15),transparent); }
+
+/* Header de sección igual que L2 */
+.intro-header { background:var(--dark); padding:44px var(--pad-page) 34px; position:relative; overflow:hidden; }
+.intro-header::before { content:''; position:absolute; right:-40px; top:-40px; width:220px; height:220px; border-radius:50%; border:35px solid rgba(201,91,12,0.1); }
+.intro-header .overline { font-size:10px; font-weight:600; letter-spacing:4px; text-transform:uppercase; color:var(--amber); margin-bottom:12px; }
+.intro-header h1 { font-family:var(--font-display); font-size:34px; font-weight:700; color:#fff; line-height:1.15; max-width:520px; }
+.intro-header h1 em { font-style:italic; color:var(--gold); }
+.intro-header .sub { margin-top:12px; font-size:13px; font-weight:300; color:rgba(255,255,255,0.5); letter-spacing:1px; }
+
+/* Caja final de consejo (reutilizada para el contacto) */
+.closing-tip { background:var(--orange); border-radius:var(--radius-card); padding:20px 24px; position:relative; overflow:hidden; margin-top:6px; }
+.closing-tip::before { content:''; position:absolute; top:-30px; right:-30px; width:120px; height:120px; border-radius:50%; border:22px solid rgba(255,255,255,0.08); }
+.closing-tip-label { font-size:9px; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,0.6); margin-bottom:8px; }
+.closing-tip-text { font-family:var(--font-display); font-style:italic; font-size:15px; color:#fff; line-height:1.65; position:relative; z-index:1; }
+.closing-tip-text strong { font-style:normal; background:rgba(255,255,255,0.15); padding:1px 6px; border-radius:3px; }
+
+@media (max-width:640px) {
+  :root { --pad-page:20px; --pad-section:28px; }
+  body { padding:0; background:var(--cream); }
+  .page { margin-bottom:0; min-height:unset; }
+  .intro-header h1 { font-size:26px; }
+  .page-footer { flex-wrap:wrap; gap:4px; padding:14px var(--pad-page); }
+  .page-footer .ptag { display:none; }
+  .band { padding:10px var(--pad-page); }
+  .page-break { display:none; }
+}
+</style>
+</head>
+<body>
+
+
+<!-- ════════════════════════════════════════
+     PÁGINA 4 — AVISO LEGAL
+     ════════════════════════════════════════ -->
+<div class="page" id="p4">
+
+  <div class="intro-header">
+    <p class="overline">Bloque 0 — Aviso legal</p>
+    <h1>Aviso legal<br><em>Prohibición de reproducción y piratería</em></h1>
+    <p class="sub">p. 4 — Derechos de autor y condiciones de uso</p>
+  </div>
+
+  <div class="band">
+    <p>Este material está protegido por derechos de autor.</p>
+    <div class="band-dot"></div>
+    <p>Su uso indebido tiene consecuencias legales.</p>
+  </div>
+
+  <div class="body-wrap">
+    <p class="body-text">Este producto digital, <strong>"ZANAH: Un solo ingrediente, decenas de productos rentables"</strong>, está registrado y protegido por las leyes de derechos de autor (Ley N.º 9.610/98).</p>
+
+    <p class="body-text">Queda estrictamente prohibida la copia, reproducción, distribución, reventa, cesión, publicación o puesta a disposición —total o parcial— de este material en grupos, redes sociales, plataformas digitales o cualquier otro medio, sin la autorización expresa de su autor.</p>
+
+    <p class="body-text">El uso no autorizado de este contenido constituye una infracción a los derechos de autor, y podrá dar lugar a sanciones civiles y penales conforme a la legislación aplicable, incluyendo indemnizaciones económicas y otras medidas legales.</p>
+
+    <p class="body-text">Al adquirir este producto, usted obtiene una licencia individual, personal e intransferible, válida únicamente para su uso privado y no comercial.</p>
+
+    <div class="divider"></div>
+
+    <p class="body-text">Si detecta este material siendo comercializado o distribuido de forma irregular, le agradecemos que se ponga en contacto de inmediato a través del correo electrónico <strong>soporte@artedulce.club</strong> para tomar las medidas correspondientes.</p>
+
+    <div class="closing-tip">
+      <p class="closing-tip-label">Un compromiso compartido</p>
+      <p class="closing-tip-text">Proteja este contenido y contribuya al <strong>crecimiento ético</strong> y sostenible de la educación digital.</p>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span class="brand">ZANAH: Un solo ingrediente, decenas de productos rentables</span>
+    <span class="pnum">p. 4</span>
+    <span class="ptag">Bloque 0 — Aviso legal</span>
+  </div>
+
+</div>
+
+</body>
+</html>

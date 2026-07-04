@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>p08 — Ingredientes base · Recetario de Zanahoria</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --choco:#1C0F08; --dark:#2D1710; --rust:#8B3A0F; --orange:#C95B0C;
+  --amber:#E8882A; --gold:#F4B44A; --cream:#FDF6EC; --ivory:#FAF0DC;
+  --warm-white:#FFFBF4; --text-dark:#1C0F08; --text-mid:#4A2C1A; --text-soft:#7A5A40;
+  --font-display:'Playfair Display',Georgia,serif; --font-body:'DM Sans',system-ui,sans-serif;
+  --pad-page:60px; --pad-section:36px; --radius-card:12px; --radius-sm:6px;
+}
+@page { size:A4; margin:0; }
+body { font-family:var(--font-body); background:#e8ddd0; color:var(--text-dark); padding:24px 0; }
+.page { width:100%; max-width:794px; min-height:1123px; margin:0 auto 32px; background:var(--cream); position:relative; overflow:hidden; display:flex; flex-direction:column; }
+.band { background:var(--orange); padding:11px var(--pad-page); display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+.band p { font-family:var(--font-display); font-style:italic; font-size:14px; color:#fff; }
+.band-dot { width:4px; height:4px; border-radius:50%; background:rgba(255,255,255,0.5); flex-shrink:0; }
+.page-footer { background:var(--choco); padding:16px var(--pad-page); margin-top:auto; display:flex; justify-content:space-between; align-items:center; }
+.page-footer .brand { font-family:var(--font-display); font-style:italic; font-size:15px; color:var(--gold); }
+.page-footer .pnum  { font-size:11px; color:rgba(255,255,255,0.3); letter-spacing:2px; }
+.page-footer .ptag  { font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,0.2); }
+.body-wrap { padding:var(--pad-section) var(--pad-page); background:var(--warm-white); flex:1; }
+.sec-label { display:flex; align-items:center; gap:10px; margin-bottom:16px; }
+.sec-label span { font-size:10px; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:var(--orange); white-space:nowrap; }
+.sec-label::after { content:''; flex:1; height:1px; background:linear-gradient(to right,rgba(201,91,12,0.3),transparent); }
+
+/* INTRO HEADER */
+.intro-header { background:var(--dark); padding:40px var(--pad-page) 30px; position:relative; overflow:hidden; }
+.intro-header::before { content:''; position:absolute; right:-40px; top:-40px; width:220px; height:220px; border-radius:50%; border:35px solid rgba(201,91,12,0.1); }
+.intro-header::after { content:'🥕'; position:absolute; right:var(--pad-page); bottom:-10px; font-size:140px; line-height:1; opacity:0.07; user-select:none; }
+.intro-header .overline { font-size:10px; font-weight:600; letter-spacing:4px; text-transform:uppercase; color:var(--amber); margin-bottom:10px; }
+.intro-header h1 { font-family:var(--font-display); font-size:32px; font-weight:700; color:#fff; line-height:1.15; max-width:500px; }
+.intro-header h1 em { font-style:italic; color:var(--gold); }
+.intro-header .sub { margin-top:10px; font-size:13px; font-weight:300; color:rgba(255,255,255,0.5); letter-spacing:1px; }
+
+/* Lead — mismo estilo que p01 */
+p.lead { font-family:var(--font-display); font-style:italic; font-size:17px; color:var(--text-mid); line-height:1.65; margin-bottom:22px; }
+
+/* GRID 2 COLUMNAS INGREDIENTES */
+.ing-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:16px; }
+.ing-block { background:var(--ivory); border-radius:var(--radius-card); padding:18px 20px; border-top:3px solid var(--amber); }
+.ing-block.full  { grid-column:1 / -1; }
+.ing-block.dark  { background:var(--dark); border-top-color:var(--gold); }
+
+.ing-block-icon  { font-size:22px; margin-bottom:8px; display:block; }
+.ing-block-name  { font-family:var(--font-display); font-size:15px; font-weight:700; color:var(--text-dark); margin-bottom:5px; }
+.ing-block.dark .ing-block-name { color:var(--gold); }
+.ing-qty { display:inline-block; background:var(--orange); color:#fff; font-size:11px; font-weight:700; padding:3px 10px; border-radius:100px; margin-bottom:10px; letter-spacing:0.5px; }
+.ing-block.dark .ing-qty { background:var(--gold); color:var(--choco); }
+
+/* Texto de tarjeta — igual que body-text en p01 */
+.ing-block-text { font-size:13.5px; color:var(--text-mid); line-height:1.7; margin-bottom:0; }
+.ing-block.dark .ing-block-text { color:rgba(255,255,255,0.7); }
+.ing-alert { margin-top:10px; padding:6px 10px; background:rgba(201,91,12,0.08); border-radius:var(--radius-sm); font-size:12.5px; color:var(--rust); line-height:1.5; }
+.ing-block.dark .ing-alert { background:rgba(244,180,74,0.08); color:var(--gold); }
+
+/* FILA INFERIOR */
+.bottom-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+
+/* SUSTITUCIONES */
+.sub-card { background:var(--ivory); border-radius:var(--radius-card); padding:18px 20px; border-left:4px solid var(--orange); }
+.sub-list { list-style:none; }
+.sub-list li { display:grid; grid-template-columns:auto 18px 1fr; align-items:baseline; gap:0 8px; padding:8px 0; border-bottom:1px dashed rgba(201,91,12,0.15); font-size:13.5px; }
+.sub-list li:last-child { border-bottom:none; }
+.sub-from  { color:var(--text-dark); font-weight:600; }
+.sub-arrow { color:var(--amber); font-size:12px; text-align:center; }
+.sub-to    { color:var(--text-mid); }
+.sub-note  { grid-column:1/-1; font-size:12px; color:var(--text-soft); padding-top:2px; padding-left:1px; font-style:italic; }
+
+/* REGLA DE ORO */
+.gold-rule { background:var(--choco); border-radius:var(--radius-card); padding:20px 22px; display:flex; flex-direction:column; justify-content:space-between; position:relative; overflow:hidden; }
+.gold-rule::before { content:'★'; position:absolute; bottom:-14px; right:16px; font-size:100px; color:rgba(244,180,74,0.06); line-height:1; user-select:none; }
+.gold-rule-label { font-size:9px; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:var(--amber); margin-bottom:12px; }
+.gold-rule-text { font-family:var(--font-display); font-style:italic; font-size:17px; color:#fff; line-height:1.65; position:relative; z-index:1; flex:1; }
+.gold-rule-text strong { font-style:normal; color:var(--gold); }
+.gold-rule-tip { margin-top:14px; padding-top:12px; border-top:1px solid rgba(255,255,255,0.07); font-size:13px; color:rgba(255,255,255,0.45); line-height:1.6; position:relative; z-index:1; }
+
+@media (max-width:640px) {
+  :root { --pad-page:20px; --pad-section:24px; }
+  body { padding:0; background:var(--cream); }
+  .page { margin-bottom:0; min-height:unset; }
+  .intro-header h1 { font-size:26px; }
+  .ing-grid, .bottom-row { grid-template-columns:1fr; }
+  .ing-block.full { grid-column:1; }
+  .page-footer { flex-wrap:wrap; gap:4px; padding:14px var(--pad-page); }
+  .page-footer .ptag { display:none; }
+  .band { padding:10px var(--pad-page); }
+}
+</style>
+</head>
+<body>
+
+<div class="page" id="p08-ingredientes-base">
+
+  <div class="intro-header">
+    <p class="overline">Lista maestra</p>
+    <h1>Ingredientes base<br>y <em>sustituciones</em></h1>
+    <p class="sub">p. 08 — Referencia de producción</p>
+  </div>
+
+  <div class="band">
+    <p>Cinco ingredientes hacen el núcleo.</p>
+    <div class="band-dot"></div>
+    <p>Lo que cambia son los rellenos, coberturas y ajustes de textura.</p>
+  </div>
+
+  <div class="body-wrap">
+
+    <p class="lead">Zanahoria, huevos, aceite, azúcar y harina. Con eso ya tienes la base de casi todas las versiones de este recetario. Lo que varía entre una receta y otra son los acabados.</p>
+
+    <div class="sec-label"><span>Ingredientes principales</span></div>
+
+    <div class="ing-grid">
+
+      <div class="ing-block">
+        <span class="ing-block-icon">🥕</span>
+        <p class="ing-block-name">Zanahoria</p>
+        <span class="ing-qty">300 g · ≈ 3 medianas</span>
+        <p class="ing-block-text">Fresca, pelada y en trozos. Se procesa directamente en la licuadora con los líquidos.</p>
+        <div class="ing-alert">⚠ Evita zanahoria rallada: la textura de la masa no queda igual.</div>
+      </div>
+
+      <div class="ing-block">
+        <span class="ing-block-icon">🫙</span>
+        <p class="ing-block-name">Aceite vegetal</p>
+        <span class="ing-qty">½ taza · 120 ml</span>
+        <p class="ing-block-text">Girasol, canola o maíz. Es lo que garantiza la humedad y esponjosidad. No lo reduzcas.</p>
+        <div class="ing-alert">⚠ No uses aceite de oliva: cambia el sabor del bolo.</div>
+      </div>
+
+      <div class="ing-block">
+        <span class="ing-block-icon">🍬</span>
+        <p class="ing-block-name">Azúcar</p>
+        <span class="ing-qty">Base: blanca refinada</span>
+        <p class="ing-block-text">Blanca es la opción estándar. La morena da sabor acaramelado y oscurece la masa — úsala solo si buscas ese perfil.</p>
+        <div class="ing-alert">↓ Versión menos dulce: reduce hasta un 20%.</div>
+      </div>
+
+      <div class="ing-block dark">
+        <span class="ing-block-icon">🍫</span>
+        <p class="ing-block-name">Cacao y chocolate</p>
+        <span class="ing-qty">Cobertura · no chocolate de mesa</span>
+        <p class="ing-block-text">Para el brigadeiro: leche condensada + cacao sin azúcar. Para bañar: cobertura de buena calidad — derrite mejor y queda con brillo.</p>
+        <div class="ing-alert">★ Cacao sin azúcar: control total sobre el dulzor final.</div>
+      </div>
+
+      <div class="ing-block full">
+        <span class="ing-block-icon">🌾🥚</span>
+        <p class="ing-block-name">Harina de trigo y huevos</p>
+        <span class="ing-qty">Harina sin preparar · Huevos a temperatura ambiente</span>
+        <p class="ing-block-text">Los huevos a temperatura ambiente son clave para que la masa emulsione bien. Si el cliente pide versión sin gluten, sustituye la harina por una mezcla de harina de arroz con fécula de maíz a partes iguales — el resultado queda ligeramente más denso pero funciona.</p>
+      </div>
+
+    </div>
+
+    <div class="bottom-row">
+
+      <div class="sub-card">
+        <div class="sec-label"><span>Sustituciones de emergencia</span></div>
+        <ul class="sub-list">
+          <li>
+            <span class="sub-from">Aceite</span>
+            <span class="sub-arrow">→</span>
+            <span class="sub-to">Mantequilla derretida</span>
+            <span class="sub-note">Misma cantidad · sabor más rico</span>
+          </li>
+          <li>
+            <span class="sub-from">Azúcar blanca</span>
+            <span class="sub-arrow">→</span>
+            <span class="sub-to">Azúcar morena</span>
+            <span class="sub-note">Usa un 20% menos de cantidad</span>
+          </li>
+          <li>
+            <span class="sub-from">Leche condensada</span>
+            <span class="sub-arrow">→</span>
+            <span class="sub-to">Leche condensada de coco</span>
+            <span class="sub-note">Versión sin lactosa · mismo proceso</span>
+          </li>
+          <li>
+            <span class="sub-from">Harina de trigo</span>
+            <span class="sub-arrow">→</span>
+            <span class="sub-to">Mezcla sin gluten</span>
+            <span class="sub-note">Arroz + fécula de maíz · textura más compacta</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="gold-rule">
+        <p class="gold-rule-label">Regla de oro</p>
+        <p class="gold-rule-text">No cambies <strong>más de un ingrediente a la vez</strong> cuando estés probando una sustitución.</p>
+        <p class="gold-rule-tip">Así sabes exactamente qué afectó el resultado y puedes ajustar sin perder el lote completo.</p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="page-footer">
+    <span class="brand">ZANAH: Un solo ingrediente, decenas de productos rentables</span>
+    <span class="pnum">p. 08</span>
+    <span class="ptag">Lista maestra — Ingredientes base</span>
+  </div>
+
+</div>
+
+</body>
+</html>

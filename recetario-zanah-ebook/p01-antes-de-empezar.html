@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bienvenida — Zanahoria El Recetario de Autor</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ══ DESIGN TOKENS — no modificar ══ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --choco:      #1C0F08;
+  --dark:       #2D1710;
+  --rust:       #8B3A0F;
+  --orange:     #C95B0C;
+  --amber:      #E8882A;
+  --gold:       #F4B44A;
+  --cream:      #FDF6EC;
+  --ivory:      #FAF0DC;
+  --warm-white: #FFFBF4;
+  --text-dark:  #1C0F08;
+  --text-mid:   #4A2C1A;
+  --text-soft:  #7A5A40;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body:    'DM Sans', system-ui, sans-serif;
+  --pad-page: 60px;
+}
+@page { size: A4; margin: 0; }
+
+body {
+  font-family: var(--font-body);
+  background: #1a100a;
+  padding: 32px 0;
+}
+.page {
+  width: 100%;
+  max-width: 794px;
+  /* min-height: 1123px; — solo activar para exportar PDF */
+  margin: 0 auto 40px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: var(--cream);
+}
+
+/* ── Footer de página (una sola vez, al final) ── */
+.page-footer {
+  background: var(--choco);
+  padding: 15px var(--pad-page);
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.page-footer .brand { font-family: var(--font-display); font-style: italic; font-size: 15px; color: var(--gold); }
+.page-footer .pnum  { font-size: 11px; color: rgba(255,255,255,0.3); letter-spacing: 2px; }
+.page-footer .ptag  { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.18); }
+
+/* ── Encabezado principal ── */
+.ae-header {
+  background: var(--choco);
+  padding: 44px var(--pad-page) 38px;
+  position: relative;
+  overflow: hidden;
+}
+.ae-header::before {
+  content: '';
+  position: absolute;
+  right: -55px; top: -55px;
+  width: 280px; height: 280px;
+  border-radius: 50%;
+  border: 48px solid rgba(201,91,12,0.08);
+}
+.ae-header-deco {
+  position: absolute;
+  right: calc(var(--pad-page) - 8px); bottom: -28px;
+  font-family: var(--font-display);
+  font-size: 130px; font-weight: 900;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(244,180,74,0.09);
+  line-height: 1; user-select: none;
+}
+.ae-header-overline {
+  font-size: 9px; font-weight: 600;
+  letter-spacing: 5px; text-transform: uppercase;
+  color: var(--amber); opacity: 0.8; margin-bottom: 16px;
+}
+.ae-header-title {
+  font-family: var(--font-display);
+  font-size: 36px; font-weight: 700;
+  color: #fff; line-height: 1.12;
+  max-width: 500px; position: relative; z-index: 1;
+}
+.ae-header-title em { font-style: italic; color: var(--gold); }
+
+/* ── Banda naranja ── */
+.ae-band {
+  background: var(--orange);
+  padding: 13px var(--pad-page);
+}
+.ae-band p {
+  font-family: var(--font-display);
+  font-style: italic; font-size: 16px; color: #fff;
+}
+
+/* ── Encabezado de continuación — página 4 ── */
+/* Usa banda naranja (no oscura) para no confundirse con el footer de p3 */
+.ae-cont-band {
+  background: var(--orange);
+  padding: 12px var(--pad-page);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ae-cont-label {
+  font-size: 9px; font-weight: 600;
+  letter-spacing: 4px; text-transform: uppercase;
+  color: rgba(255,255,255,0.75);
+}
+.ae-cont-title {
+  font-family: var(--font-display);
+  font-style: italic; font-size: 15px;
+  color: rgba(255,255,255,0.85);
+}
+.ae-cont-page {
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+}
+
+/* ── Cuerpo ── */
+.ae-body {
+  flex: 1;
+  background: var(--warm-white);
+  padding: 40px var(--pad-page);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Cards (igual que contraportada) ── */
+.ae-cards-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.ae-card {
+  background: var(--ivory);
+  border-radius: 10px;
+  padding: 22px 22px 20px;
+  border-top: 3px solid var(--amber);
+}
+.ae-card-label {
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--orange); margin-bottom: 12px;
+}
+.ae-card-body {
+  font-size: 14.5px; color: var(--text-mid);
+  line-height: 1.75;
+}
+.ae-card-body p { margin-bottom: 10px; }
+.ae-card-body p:last-child { margin-bottom: 0; }
+.ae-card-body em     { font-style: italic; color: var(--rust); }
+.ae-card-body strong { font-weight: 600; color: var(--text-dark); }
+
+/* Card ancho completo con borde izquierdo */
+.ae-card-full {
+  background: var(--ivory);
+  border-radius: 10px;
+  padding: 18px 22px;
+  border-left: 4px solid rgba(201,91,12,0.3);
+}
+.ae-card-full p {
+  font-size: 14.5px; color: var(--text-mid); line-height: 1.75;
+}
+.ae-card-full p strong { font-weight: 600; color: var(--text-dark); }
+
+/* Separador fino */
+.ae-sep {
+  height: 1px;
+  background: linear-gradient(to right, rgba(201,91,12,0.2), transparent);
+  margin: 4px 0;
+}
+
+/* Bloque de cierre oscuro */
+.ae-cierre {
+  background: var(--dark);
+  border-radius: 12px;
+  padding: 26px 30px;
+  position: relative;
+  overflow: hidden;
+}
+.ae-cierre::before {
+  content: '';
+  position: absolute;
+  right: -30px; bottom: -30px;
+  width: 160px; height: 160px;
+  border-radius: 50%;
+  border: 30px solid rgba(201,91,12,0.09);
+}
+.ae-cierre p {
+  font-size: 15px; color: rgba(255,255,255,0.6);
+  line-height: 1.78; position: relative; z-index: 1;
+}
+.ae-cierre p strong { color: #fff; font-weight: 600; }
+.ae-cierre p em { font-style: italic; color: rgba(244,180,74,0.85); }
+
+/* ══ RESPONSIVE ══ */
+@media (max-width: 640px) {
+  :root { --pad-page: 20px; }
+  body  { padding: 0; background: var(--cream); }
+  .page { min-height: unset; margin-bottom: 0; }
+  .ae-header-title  { font-size: 24px; }
+  .ae-header-deco   { display: none; }
+  .ae-cards-row     { grid-template-columns: 1fr; }
+  .ae-cont-band     { flex-direction: column; align-items: flex-start; gap: 4px; }
+  .page-footer .ptag { display: none; }
+}
+
+  /* ── EXPORTAR A PDF ──────────────────────────────
+     Al imprimir o guardar como PDF desde el navegador:
+     Archivo → Imprimir → Guardar como PDF
+     Configuración: Sin márgenes, Escala: 100%
+  ─────────────────────────────────────────────── */
+  @media print {
+    @page { size: A4; margin: 0; }
+    body  { background: white !important; padding: 0 !important; }
+    .page {
+      min-height: 100vh;
+      page-break-after: always;
+      break-after: page;
+      margin: 0 !important;
+      max-width: 100% !important;
+    }
+    .page:last-child {
+      page-break-after: avoid;
+      break-after: avoid;
+    }
+  }
+</style>
+</head>
+<body>
+
+
+<!-- ═══════════════════════════════════════════════════
+     PÁGINA 3 — Antes de empezar (1 de 2)
+═══════════════════════════════════════════════════ -->
+<div class="page">
+
+  <div class="ae-header">
+    <span class="ae-header-deco">0</span>
+    <p class="ae-header-overline">Bloque 0 — Bienvenida · p. 03 de 52</p>
+    <h1 class="ae-header-title">
+      Bienvenida a ZANAH<br>
+      <em>acabás de tomar una gran decisión</em>
+    </h1>
+  </div>
+
+  <div class="ae-band">
+    <p>Antes de las recetas, quiero que veas todo lo que esto va a cambiar en tu negocio.</p>
+  </div>
+
+  <div class="ae-body">
+
+    <!-- Dos cards superiores -->
+    <div class="ae-cards-row">
+      <div class="ae-card">
+        <p class="ae-card-label">Si llegaste hasta acá, ya venías cansada de algo</p>
+        <div class="ae-card-body">
+          <p>De tener demasiadas recetas sueltas. De comprar diez ingredientes distintos para sostener un menú que crece sin ningún criterio. De improvisar cada vez que alguien te pide algo nuevo.</p>
+          <p>Eso termina hoy. Con <strong>un solo ingrediente</strong> vas a construir algo mucho más ordenado, más rentable y más tuyo.</p>
+        </div>
+      </div>
+      <div class="ae-card">
+        <p class="ae-card-label">Esto no es un recetario más</p>
+        <div class="ae-card-body">
+          <p>Es un sistema. Una base sólida que se multiplica en un catálogo entero, sin que tengas que reinventar la rueda con cada pedido.</p>
+          <p>Dejás de perseguir tendencias y empezás a construir <em>algo reconocible, con tu sello.</em></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card ancho completo -->
+    <div class="ae-card-full">
+      <p>Elegiste organizar tu negocio en lugar de seguir improvisando. Eso ya te pone un paso adelante de la mayoría.</p>
+    </div>
+
+    <div class="ae-sep"></div>
+
+    <!-- Bloque cierre oscuro -->
+    <div class="ae-cierre">
+      <p><strong>No compraste un libro de recetas.</strong><br>
+      Compraste un sistema para dejar de ofrecer opciones infinitas sin rumbo, y empezar a vender <em>con foco, con criterio y con rentabilidad real.</em></p>
+    </div>
+
+  </div><!-- /ae-body -->
+
+</div><!-- /página 3 -->
+
+
+<!-- ═══════════════════════════════════════════════════
+     PÁGINA 4 — Antes de empezar (2 de 2)
+═══════════════════════════════════════════════════ -->
+<div class="page">
+
+  <!-- Banda naranja de continuación -->
+  <div class="ae-cont-band">
+    <span class="ae-cont-label">Bienvenida · continúa</span>
+    <span class="ae-cont-title">Bienvenida a ZANAH</span>
+    <span class="ae-cont-page">p. 04 · 52</span>
+  </div>
+
+  <div class="ae-body" >
+
+    <!-- Dos cards superiores -->
+    <div class="ae-cards-row">
+      <div class="ae-card">
+        <p class="ae-card-label">Se acabó el inventario interminable</p>
+        <div class="ae-card-body">
+          <p>Ya no necesitás sostener un stock enorme de ingredientes distintos para justificar un menú disperso. Con una base y sus variaciones, vas a producir más variedad con muchos menos insumos.</p>
+          <p>Menos desperdicio, menos compras urgentes, <strong>más control real sobre tu costo y tu tiempo.</strong></p>
+        </div>
+      </div>
+      <div class="ae-card">
+        <p class="ae-card-label">Tu catálogo boutique empieza acá</p>
+        <div class="ae-card-body">
+          <p>Ya no vas a decir que sí a cualquier pedido. Vas a elegir las variaciones que mejor representan tu marca y armar un catálogo acotado, coherente y fácil de sostener.</p>
+          <p>Menos opciones, mejor presentadas, es lo que realmente <strong>vende y fideliza.</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card ancho completo -->
+    <div class="ae-card-full" >
+      <p>Esta decisión que tomaste hoy es la que te permite dejar de improvisar pedido por pedido y empezar a operar con un sistema propio.</p>
+    </div>
+
+    <div class="ae-sep"></div>
+
+    <!-- Cierre -->
+    <div class="ae-cierre">
+      <p>Bienvenida de verdad. Esto recién empieza,<br>
+      <strong>y vas a construirlo con criterio, desde la primera página.</strong></p>
+    </div>
+
+  </div><!-- /ae-body -->
+
+  <div class="page-footer">
+    <span class="brand">ZANAH: Un solo ingrediente, decenas de productos rentables</span>
+    <span class="pnum">p. 04</span>
+    <span class="ptag">Bloque 0 — Antes de empezar</span>
+  </div>
+
+</div><!-- /página 4 -->
+
+
+</body>
+</html>

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cómo usar este recetario — Zanahoria El Recetario de Autor</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ══ DESIGN TOKENS — no modificar ══ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --choco:      #1C0F08;
+  --dark:       #2D1710;
+  --rust:       #8B3A0F;
+  --orange:     #C95B0C;
+  --amber:      #E8882A;
+  --gold:       #F4B44A;
+  --cream:      #FDF6EC;
+  --ivory:      #FAF0DC;
+  --warm-white: #FFFBF4;
+  --text-dark:  #1C0F08;
+  --text-mid:   #4A2C1A;
+  --text-soft:  #7A5A40;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body:    'DM Sans', system-ui, sans-serif;
+  --pad-page: 60px;
+}
+@page { size: A4; margin: 0; }
+
+body {
+  font-family: var(--font-body);
+  background: #1a100a;
+  padding: 32px 0;
+}
+.page {
+  width: 100%;
+  max-width: 794px;
+  /* min-height: 1123px; — activar solo para exportar PDF */
+  margin: 0 auto 40px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: var(--cream);
+}
+
+/* ── Footer ── */
+.page-footer {
+  background: var(--choco);
+  padding: 15px var(--pad-page);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.page-footer .brand { font-family: var(--font-display); font-style: italic; font-size: 15px; color: var(--gold); }
+.page-footer .pnum  { font-size: 11px; color: rgba(255,255,255,0.3); letter-spacing: 2px; }
+.page-footer .ptag  { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.18); }
+
+/* ── Header ── */
+.ae-header {
+  background: var(--choco);
+  padding: 40px var(--pad-page) 34px;
+  position: relative;
+  overflow: hidden;
+}
+.ae-header::before {
+  content: '';
+  position: absolute;
+  right: -55px; top: -55px;
+  width: 260px; height: 260px;
+  border-radius: 50%;
+  border: 44px solid rgba(201,91,12,0.08);
+}
+.ae-header-deco {
+  position: absolute;
+  right: calc(var(--pad-page) - 8px); bottom: -22px;
+  font-family: var(--font-display);
+  font-size: 110px; font-weight: 900;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(244,180,74,0.09);
+  line-height: 1; user-select: none;
+}
+.ae-header-overline {
+  font-size: 9px; font-weight: 600;
+  letter-spacing: 5px; text-transform: uppercase;
+  color: var(--amber); opacity: 0.8; margin-bottom: 14px;
+}
+.ae-header-title {
+  font-family: var(--font-display);
+  font-size: 34px; font-weight: 700;
+  color: #fff; line-height: 1.12;
+  max-width: 480px; position: relative; z-index: 1;
+}
+.ae-header-title em { font-style: italic; color: var(--gold); }
+
+/* ── Banda naranja ── */
+.ae-band {
+  background: var(--orange);
+  padding: 12px var(--pad-page);
+}
+.ae-band p {
+  font-family: var(--font-display);
+  font-style: italic; font-size: 15px; color: #fff;
+}
+
+/* ── Cuerpo ── */
+.ae-body {
+  background: var(--warm-white);
+  padding: 36px var(--pad-page);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* ── Grid 2 columnas ── */
+.ae-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+/* ── Card base ── */
+.ae-card {
+  background: var(--ivory);
+  border-radius: 10px;
+  padding: 20px 22px;
+  border-top: 3px solid var(--amber);
+}
+.ae-card-label {
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--orange); margin-bottom: 11px;
+}
+.ae-card-body {
+  font-size: 14.5px; color: var(--text-mid); line-height: 1.72;
+}
+.ae-card-body p { margin-bottom: 9px; }
+.ae-card-body p:last-child { margin-bottom: 0; }
+.ae-card-body strong { font-weight: 600; color: var(--text-dark); }
+.ae-card-body em     { font-style: italic; color: var(--rust); }
+
+/* Card ancho completo con borde izquierdo */
+.ae-card-full {
+  background: var(--ivory);
+  border-radius: 10px;
+  padding: 16px 22px;
+  border-left: 4px solid rgba(201,91,12,0.3);
+}
+.ae-card-full p {
+  font-size: 14.5px; color: var(--text-mid); line-height: 1.72;
+}
+.ae-card-full p strong { font-weight: 600; color: var(--text-dark); }
+
+/* ── Card de símbolos ── */
+.symbols-card {
+  background: var(--dark);
+  border-radius: 10px;
+  padding: 20px 22px;
+  border-top: 3px solid var(--gold);
+}
+.symbols-label {
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 14px;
+}
+.symbol-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.symbol-item:last-child { border-bottom: none; padding-bottom: 0; }
+.symbol-icon {
+  font-size: 18px;
+  width: 28px;
+  flex-shrink: 0;
+  text-align: center;
+  margin-top: 1px;
+}
+.symbol-text {}
+.symbol-name {
+  font-size: 13.5px; font-weight: 600;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 2px;
+}
+.symbol-desc {
+  font-size: 13.5px; color: rgba(255,255,255,0.45); line-height: 1.4;
+}
+
+/* ── Glosario ── */
+.glosario-card {
+  background: var(--ivory);
+  border-radius: 10px;
+  padding: 20px 22px;
+  border-top: 3px solid var(--amber);
+}
+.glosario-label {
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--orange); margin-bottom: 12px;
+}
+.glosario-item {
+  padding: 8px 0;
+  border-bottom: 1px dashed rgba(201,91,12,0.15);
+}
+.glosario-item:last-child { border-bottom: none; padding-bottom: 0; }
+.glosario-term {
+  font-size: 13.5px; font-weight: 600;
+  color: var(--rust); margin-bottom: 2px;
+}
+.glosario-def {
+  font-size: 13.5px; color: var(--text-mid); line-height: 1.55;
+}
+
+/* ── Separador ── */
+.ae-sep {
+  height: 1px;
+  background: linear-gradient(to right, rgba(201,91,12,0.18), transparent);
+}
+
+/* ══ RESPONSIVE ══ */
+@media (max-width: 640px) {
+  :root { --pad-page: 20px; }
+  body  { padding: 0; background: var(--cream); }
+  .ae-header-title  { font-size: 24px; }
+  .ae-header-deco   { display: none; }
+  .ae-row           { grid-template-columns: 1fr; }
+  .page-footer .ptag { display: none; }
+}
+
+  /* ── EXPORTAR A PDF ──────────────────────────────
+     Al imprimir o guardar como PDF desde el navegador:
+     Archivo → Imprimir → Guardar como PDF
+     Configuración: Sin márgenes, Escala: 100%
+  ─────────────────────────────────────────────── */
+  @media print {
+    @page { size: A4; margin: 0; }
+    body  { background: white !important; padding: 0 !important; }
+    .page {
+      min-height: 100vh;
+      page-break-after: always;
+      break-after: page;
+      margin: 0 !important;
+      max-width: 100% !important;
+    }
+    .page:last-child {
+      page-break-after: avoid;
+      break-after: avoid;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- Header -->
+  <div class="ae-header">
+    <span class="ae-header-deco">0</span>
+    <p class="ae-header-overline">Bloque 0 — Entrada · p. 06 de 52</p>
+    <h1 class="ae-header-title">Cómo usar<br><em>este recetario</em></h1>
+  </div>
+
+  <!-- Banda -->
+  <div class="ae-band">
+    <p>Todo lo que necesitas saber antes de empezar la primera ficha.</p>
+  </div>
+
+  <!-- Cuerpo -->
+  <div class="ae-body">
+
+    <!-- Fila 1: cómo funciona + símbolos -->
+    <div class="ae-row">
+
+      <div class="ae-card">
+        <p class="ae-card-label">Cada ficha te dice exactamente qué hacer</p>
+        <div class="ae-card-body">
+          <p>Cada variación ocupa tres páginas: foto de referencia, ingredientes con proporciones y nota de presentación. Al final, un <strong>argumento de venta</strong> listo para usar con tu cliente.</p>
+          <p>No necesitas leer el recetario de principio a fin. Puedes ir directo a la variación que te interesa y empezar desde ahí.</p>
+        </div>
+      </div>
+
+      <div class="symbols-card">
+        <p class="symbols-label">Qué significan los símbolos</p>
+        <div class="symbol-item">
+          <span class="symbol-icon">⏱</span>
+          <div class="symbol-text">
+            <p class="symbol-name">Tiempo de producción</p>
+            <p class="symbol-desc">Estimado orientativo para producción artesanal</p>
+          </div>
+        </div>
+        <div class="symbol-item">
+          <span class="symbol-icon">💰</span>
+          <div class="symbol-text">
+            <p class="symbol-name">Costo relativo</p>
+            <p class="symbol-desc">Bajo / medio / alto según ingredientes</p>
+          </div>
+        </div>
+        <div class="symbol-item">
+          <span class="symbol-icon">📦</span>
+          <div class="symbol-text">
+            <p class="symbol-name">Formato de venta</p>
+            <p class="symbol-desc">Unidad, caja o encargo</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Nota sobre símbolos -->
+    <div class="ae-card-full">
+      <p>Los símbolos son <strong>orientativos</strong>. Tu costo real depende de tu mercado y tus proveedores, pero te dan una idea para empezar a calcular.</p>
+    </div>
+
+    <div class="ae-sep"></div>
+
+    <!-- Fila 2: proporciones + glosario -->
+    <div class="ae-row">
+
+      <div class="ae-card">
+        <p class="ae-card-label">Sobre las proporciones</p>
+        <div class="ae-card-body">
+          <p>Las recetas están pensadas para producción casera o artesanal pequeña. Si produces en mayor volumen, multiplica. <strong>No cambies el orden de los pasos:</strong> en repostería, el proceso importa tanto como los ingredientes.</p>
+          <p>Cuando una ficha lleve brigadeiro, encontrarás la preparación base en la <em>Variación 19</em>. No se repite en cada ficha para no ocupar espacio.</p>
+        </div>
+      </div>
+
+      <div class="glosario-card">
+        <p class="glosario-label">Glosario rápido</p>
+        <div class="glosario-item">
+          <p class="glosario-term">Brigadeiro</p>
+          <p class="glosario-def">Dulce brasileño de leche condensada cocinada con mantequilla. Cremoso en caliente, firme en frío.</p>
+        </div>
+        <div class="glosario-item">
+          <p class="glosario-term">Craquelado</p>
+          <p class="glosario-def">Cobertura de chocolate que endurece con superficie agrietada. Chocolate de cobertura y aceite neutro.</p>
+        </div>
+        <div class="glosario-item">
+          <p class="glosario-term">Naked cake</p>
+          <p class="glosario-def">Tarta en capas con laterales sin cubrir del todo. Efecto rústico y fotogénico.</p>
+        </div>
+        <div class="glosario-item">
+          <p class="glosario-term">Loaf</p>
+          <p class="glosario-def">Formato de pan de molde rectangular. En repostería, para bizcochos de corte.</p>
+        </div>
+        <div class="glosario-item">
+          <p class="glosario-term">Bite</p>
+          <p class="glosario-def">Porción de un bocado. Para venta unitaria o en cajitas de varios.</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div><!-- /ae-body -->
+
+  <div class="page-footer">
+    <span class="brand">ZANAH: Un solo ingrediente, decenas de productos rentables</span>
+    <span class="pnum">p. 06</span>
+    <span class="ptag">Bloque 0 — Cómo usar este recetario</span>
+  </div>
+
+</div>
+
+</body>
+</html>
